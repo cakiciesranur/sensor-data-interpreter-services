@@ -5,7 +5,7 @@ logging:
   level:
     .: error
     org.springframework: ERROR
-    com.eny: ERROR
+    com.eny: DEBUG
 
 spring:
   application:
@@ -20,6 +20,14 @@ spring:
     consumer:
       topic: sensor-data
       auto-offset-reset: earliest
+#      properties:
+#        spring:
+#          json:
+#            trusted:
+#              packages: "*"
+#            add:
+#              type:
+#                headers: false
 
 eureka:
   instance:
@@ -27,8 +35,8 @@ eureka:
     lease-expiration-duration-in-seconds: 1
     lease-renewal-interval-in-seconds: 2
   client:
-  register-with-eureka: true
-  fetch-registry: true
+    register-with-eureka: true
+    fetch-registry: true
 
 springdoc:
   swagger-ui:

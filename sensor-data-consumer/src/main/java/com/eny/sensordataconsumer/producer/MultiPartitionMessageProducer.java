@@ -1,6 +1,6 @@
-package com.eny.sensordataconsumer.delete;
+package com.eny.sensordataconsumer.producer;
 
-import com.eny.sensordataconsumer.payload.SensorDataMessage;
+import com.eny.sensordataconsumer.payload.request.SensorDataMessage;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,9 +18,9 @@ public class MultiPartitionMessageProducer {
     private static final Logger LOGGER = LoggerFactory.getLogger(MultiPartitionMessageProducer.class);
     private final KafkaTemplate<String, SensorDataMessage> kafkaTemplate;
 
-    public void send(String topic, SensorDataMessage payload) {
+    public void send(String topic, String key, SensorDataMessage payload) {
         LOGGER.info("Sending payload='{}' to topic='{}", payload, topic);
-        ListenableFuture<SendResult<String, SensorDataMessage>> future = kafkaTemplate.send(topic, payload);
+        ListenableFuture<SendResult<String, SensorDataMessage>> future = kafkaTemplate.send(topic, key, payload);
         SuccessCallback<SendResult<String, SensorDataMessage>> successCallback = sendResult ->
                 LOGGER.info("Sent payload='{}' to topic-partition@offset='{}'", payload, sendResult.getRecordMetadata().toString());
         FailureCallback failureCallback = throwable ->

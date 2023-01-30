@@ -1,4 +1,4 @@
-package com.eny.sensordataconsumer.payload;
+package com.eny.sensordataconsumer.payload.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -3,9 +3,7 @@ server:
 
 logging:
   level:
-    .: error
-    org.springframework: ERROR
-    com.eny: DEBUG
+    ROOT: DEBUG
 
 spring:
   data:
@@ -16,8 +14,7 @@ spring:
       password: password
   kafka:
     bootstrap-servers: localhost:9092, localhost:9093, localhost:9094
-
-eureka:
+feign:
   client:
-    service-url:
-      defaultZone: localhost:8761/eureka/
+    device-service:
+      url: localhost:8084

@@ -1,4 +1,7 @@
 version: '3.9'
+networks:
+  host:
+    driver: bridge
 
 services:
 ############# Sensor Data Consumer ##############
@@ -23,6 +26,7 @@ services:
       SPRING_DATA_MONGODB_USERNAME: consumerUser
       SPRING_DATA_MONGODB_PASSWORD: password
       SPRING_DATA_MONGODB_DATABASE: sensorDataDb
+      FEIGN_CLIENT_DEVICE_SERVICE_URL: device-service:8084
     depends_on:
       - mongo
       - zookeeper-1
@@ -30,6 +34,8 @@ services:
       - kafka-2
       - kafka-3
       - eureka
+    networks:
+      - host
 
   zookeeper-1:
     image: confluentinc/cp-zookeeper:latest
@@ -40,6 +46,8 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - "22181:2181"
+    networks:
+      - host
 
   kafka-1:
     image: confluentinc/cp-kafka:latest
@@ -56,6 +64,8 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      - host
 
   kafka-2:
     image: confluentinc/cp-kafka:latest
@@ -72,6 +82,8 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      - host
 
   kafka-3:
     image: confluentinc/cp-kafka:latest
@@ -88,6 +100,8 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      - host
 
   kafdrop:
     image: obsidiandynamics/kafdrop
@@ -102,6 +116,8 @@ services:
       - kafka-1
       - kafka-2
       - kafka-3
+    networks:
+      - host
 
   mongo:
     image: mongo
@@ -115,6 +131,8 @@ services:
       MONGO_INITDB_DATABASE: sensorDataDb
     volumes:
       - ./sensor-data-consumer/docker-entrypoint-initdb.d/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - host
 
   mongo-express:
     image: mongo-express
@@ -128,6 +146,8 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: rootUser
       ME_CONFIG_MONGODB_ADMINPASSWORD: rootPassword
       ME_CONFIG_MONGODB_URL: mongodb://rootUser:rootPassword@mongo:27017/
+    networks:
+      - host
 
 ################## Device Service ###########
   db:
@@ -141,6 +161,8 @@ services:
     restart: always
     volumes:
       - ./device-service/docker-entrypoint-initdb.d/initdb.sql:/docker-entrypoint-initdb.d/initdb.sql:ro
+    networks:
+      - host
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -154,8 +176,10 @@ services:
     environment:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: spring
+    networks:
+      - host
 
-  deviceservice:
+  device-service:
     image: device-service
     container_name: device-service
     build:
@@ -176,6 +200,8 @@ services:
       SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
       SPRING_JPA_GENERATE_DDL: true
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    networks:
+      - host
 
 ############### Eureka ############
   eureka:
@@ -186,3 +212,8 @@ services:
     image: eureka-server
     ports:
       - "8761:8761"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka/
+      EUREKASERVER_PORT: "8761"
+    networks:
+      - host

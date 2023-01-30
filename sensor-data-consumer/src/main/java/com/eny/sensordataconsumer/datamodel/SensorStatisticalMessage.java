@@ -9,19 +9,20 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "sensorDataMessages")
-public class SensorDataMessage implements Serializable {
+@Document(collection = "sensorStatisticalMessages")
+public class SensorStatisticalMessage implements Serializable {
     @Id
     private String id;
     private String messageId;
     private MessageType messageType;
-    private Double temperature;
-    private Double batteryCharge;
-    private List<StatusChange> statusChanges;
+    private String deviceId;
+    private String vehicleType;
+    private Date eventTime;
+    private StatusChange statusChange;
 }

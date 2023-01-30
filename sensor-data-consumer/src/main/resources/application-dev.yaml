@@ -15,3 +15,8 @@ eureka:
   client:
     service-url:
       defaultZone: http://eureka:8761/eureka/
+
+feign:
+  client:
+    device-service:
+      url: device-service:8084

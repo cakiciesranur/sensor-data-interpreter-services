@@ -1,6 +1,6 @@
-package com.eny.sensordataconsumer.delete;
+package com.eny.sensordataconsumer.producer;
 
-import com.eny.sensordataconsumer.payload.SensorDataMessage;
+import com.eny.sensordataconsumer.payload.request.SensorDataMessage;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.apache.kafka.clients.producer.ProducerConfig;

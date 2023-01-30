@@ -14,19 +14,19 @@ import javax.persistence.Column;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "OPTIMAL_TEMPERATURE")
+@Entity(name = "optimal_temperature")
 public class OptimalDeviceTemperature {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "DEVICE_TYPE")
+    @Column(name = "device_type", unique = true)
     @NotNull
     private String deviceType;
 
     @NotNull
-    @Column(name = "TEMPERATURE")
+    @Column(name = "temperature")
     private double optimalTemp;
 
 }

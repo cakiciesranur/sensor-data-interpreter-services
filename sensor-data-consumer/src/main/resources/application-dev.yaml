@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  data:
+    mongodb:
+      port: 27017
+      database: sensorDataDb
+      username: consumerUser
+      password: password
+  kafka:
+    bootstrap-servers: kafka-1:29092,kafka-2:29093,kafka-3:29094
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:8761/eureka/

@@ -1,0 +1,43 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    .: error
+    org.springframework: ERROR
+    com.eny: DEBUG
+
+spring:
+  application:
+    name: sensor-data-consumer
+  data:
+    mongodb:
+      authentication-database: admin
+      auto-index-creation: true
+      repositories:
+        enabled: true
+  kafka:
+    consumer:
+      topic: sensor-data
+      auto-offset-reset: earliest
+#      properties:
+#        spring:
+#          json:
+#            trusted:
+#              packages: "*"
+#            add:
+#              type:
+#                headers: false
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    lease-expiration-duration-in-seconds: 1
+    lease-renewal-interval-in-seconds: 2
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui-custom.html

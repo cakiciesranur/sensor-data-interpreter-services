@@ -26,8 +26,8 @@ public class SensorStatisticalDataConsumer implements ISensorDataMessageConsumer
     private final SensorDataMessageMapper mapper;
     private final ISensorStatisticalDataMessageRepository repository;
 
-    @KafkaListener(id = "statistical-listener-id", topics = "${spring.kafka.consumer.topic}",
-            groupId = "group-statistical", containerFactory = "staticalKafkaListenerContainer")
+    @Override
+    @KafkaListener(id = "statistical-listener-id", topics = "${spring.kafka.consumer.topic}", groupId = "group-statistical", containerFactory = "staticalKafkaListenerContainer")
     public void consumeMessage(@Payload @Valid SensorDataMessage message,
                                @Header(KafkaHeaders.RECEIVED_PARTITION_ID) Long partitionId,
                                @Header(KafkaHeaders.OFFSET) Long offset,

@@ -1,3 +1,4 @@
+/*
 package com.eny.sensordataconsumer.config;
 
 import com.eny.sensordataconsumer.enums.MessageType;
@@ -37,7 +38,8 @@ public class KafkaConsumerConfiguration implements KafkaListenerConfigurer {
 
     private final LocalValidatorFactoryBean validator;
 
-  /*  @Bean
+  */
+/*  @Bean
     public Map<String, Object> consumerConfigs() {
         Map<String, Object> props = new HashMap<>();
         // list of host:port pairs used for establishing the initial connections to the Kafka cluster
@@ -54,7 +56,8 @@ public class KafkaConsumerConfiguration implements KafkaListenerConfigurer {
     public ConsumerFactory<String, SensorDataMessage> consumerFactory() {
         return new DefaultKafkaConsumerFactory<>(consumerConfigs());
     }
-    */
+    *//*
+
 
     @Bean
     public ConsumerFactory<String, SensorDataMessage> consumerFactory() {
@@ -108,3 +111,4 @@ public class KafkaConsumerConfiguration implements KafkaListenerConfigurer {
     //TODO: consume unknown type messages also important!!!
 
 }
+*/

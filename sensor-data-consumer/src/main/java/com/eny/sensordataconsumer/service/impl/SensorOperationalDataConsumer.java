@@ -31,9 +31,8 @@ public class SensorOperationalDataConsumer implements ISensorDataMessageConsumer
     @Autowired
     private DeviceServiceClient deviceServiceClient;
 
-    @KafkaListener(id = "operational-listener-id", topics = "${spring.kafka.consumer.topic}",
-            groupId = "group-operational", containerFactory = "operationalKafkaListenerContainer")
     @Override
+    @KafkaListener(id = "operational-listener-id", topics = "${spring.kafka.consumer.topic}", containerFactory = "operationalKafkaListenerContainer")
     public void consumeMessage(@Payload @Valid SensorDataMessage message,
                                @Header(KafkaHeaders.RECEIVED_PARTITION_ID) Long partitionId,
                                @Header(KafkaHeaders.OFFSET) Long offset,

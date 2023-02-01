@@ -18,12 +18,13 @@ public class OptimalDeviceTempController {
     private final OptimalDeviceTempService service;
 
     @GetMapping
+    @ResponseBody
     public ResponseEntity<List<OptimalDeviceTemperature>> getAllOptimumTempData() {
         List<OptimalDeviceTemperature> allOptTempData = service.getAllOptimumTempData();
         return new ResponseEntity<>(allOptTempData, HttpStatus.OK);
     }
 
-    @GetMapping({"/{deviceType}"})
+    @GetMapping(value = {"/{deviceType}"}, produces = "application/json")
     @ResponseBody
     public ResponseEntity<OptimalDeviceTemperature> getOptimalTempByDeviceType(@PathVariable String deviceType) {
         Optional<OptimalDeviceTemperature> optTemperatureData = service.getOptimalTemperatureByDeviceType(deviceType);

@@ -18,4 +18,4 @@ RUN ./mvnw dependency:go-offline -B
 
 RUN ./mvnw package -DskipTests
 RUN ls -al
-ENTRYPOINT ["java","-jar","target/eureka-server-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","target/sensor-data-interpreter-0.0.1-SNAPSHOT.jar"]

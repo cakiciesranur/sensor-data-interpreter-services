@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: sensor-data-interpreter
+  data:
+    mongodb:
+      authentication-database: admin
+      auto-index-creation: true
+      repositories:
+        enabled: true
+  kafka:
+    consumer:
+      topic: sensor-data
+      auto-offset-reset: earliest
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    lease-expiration-duration-in-seconds: 1
+    lease-renewal-interval-in-seconds: 2
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /api-docs

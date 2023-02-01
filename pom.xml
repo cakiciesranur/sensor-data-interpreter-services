@@ -8,9 +8,10 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>sensor-data-interpreter-services</name>
 	<description>sensor-data-interpreter-services</description>
-
+	<packaging>pom</packaging>
 	<modules>
-		<module>sensor-data-consumer</module>
+		<module>sensor-data-interpreter</module>
 		<module>device-service</module>
+		<module>eureka-server</module>
 	</modules>
 </project>

@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    org:
+      apache:
+        kafka: INFO
+    springframework: DEBUG
+
+
+spring:
+  data:
+    mongodb:
+      port: 27017
+      database: sensorDataDb
+      username: consumerUser
+      password: password
+  kafka:
+    bootstrap-servers: localhost:9092, localhost:9093, localhost:9094
+feign:
+  client:
+    device-service:
+      url: localhost:8084
